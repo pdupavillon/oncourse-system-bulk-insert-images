@@ -1,0 +1,33 @@
+{
+  "name": "oncourse-system-bulk-insert-images",
+  "version": "1.0.0",
+  "description": "Bulk insert images in oncourse website",
+  "main": "index.js",
+  "scripts": {
+    "clean": "cross-env-shell \"rm -rf ./dist/$BROWSER \"",
+    "init": "cross-env-shell \"mkdir -p ./dist/$BROWSER\"",
+    "copy": "cross-env-shell \"cp -R ./src/script.js ./src/body.js ./src/popup.js ./src/popup.html ./src/assets ./dist/$BROWSER/\" && node ./src/manifest.js > ./dist/$BROWSER/manifest.json",
+    "build:chrome": "cross-env-shell BROWSER=chrome \"npm run clean && npm run init && npm run copy\"",
+    "build:firefox": "cross-env-shell BROWSER=firefox \"npm run clean && npm run init && npm run copy\"",
+    "zip": "cross-env-shell \"cd ./dist/$BROWSER && zip -r -FS ../$BROWSER.zip * -x \"*.DS_Store\" && cd -\"",
+    "release:firefox": "cross-env-shell BROWSER=firefox \"npm run build:firefox && npm run zip\"",
+    "release:chrome": "cross-env-shell BROWSER=chrome \"npm run build:chrome && npm run zip\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdupavillon/oncourse-system-bulk-insert-images.git"
+  },
+  "keywords": [
+    "oncourse",
+    "pictures"
+  ],
+  "author": "paul du pavillon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pdupavillon/oncourse-system-bulk-insert-images/issues"
+  },
+  "homepage": "https://github.com/pdupavillon/oncourse-system-bulk-insert-images#readme",
+  "devDependencies": {
+    "cross-env": "^5.1.4"
+  }
+}
